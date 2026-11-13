@@ -1,6 +1,13 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>五術合一占卜台</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="塔羅、易經金錢卦、奇門遁甲、梅花易數交叉占卜；命盤與流年運勢指令產生器。">
+<meta name="theme-color" content="#0d0b14">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d0b14'/%3E%3Ctext x='32' y='46' font-size='40' text-anchor='middle' fill='%23e5c158'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+<style>:root{box-sizing:border-box}*,*::before,*::after{box-sizing:inherit}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap">
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.6.12/lunar.js"></script>
@@ -39,12 +46,15 @@
   .tab-btn { padding: 0.55rem 1.4rem; border-radius: 9999px; border: 1px solid rgba(212,175,55,0.35); color: var(--fg); font-weight: 700; font-size: 0.95rem; }
   .tab-btn:hover { border-color: rgba(212,175,55,0.8); }
   .tab-btn[aria-selected="true"] { background: var(--gold); color: #1a1408; border-color: var(--gold); }
+  .nobr { display: inline-block; }
 </style>
+</head>
+<body>
 
 <div class="max-w-5xl mx-auto space-y-8">
   <header class="text-center space-y-2 border-b border-amber-500/20 pb-6">
-    <p class="text-xs tracking-[0.3em] text-amber-400/80 uppercase">Astrology × BaZi × ZiWei × QiMen × I-Ching × Tarot</p>
-    <h1 class="text-3xl md:text-4xl font-bold text-amber-300 tracking-wider">五術合一・時空演易交叉占卜</h1>
+    <p class="text-xs tracking-[0.3em] text-amber-400/80 uppercase">Tarot × I-Ching × QiMen × MeiHua × BaZi × ZiWei × Astrology</p>
+    <h1 class="text-3xl md:text-4xl font-bold text-amber-300 tracking-wider"><span class="nobr">五術合一・</span><span class="nobr">時空演易交叉占卜</span></h1>
     <p class="text-sm text-stone-300 max-w-2xl mx-auto">三個區各自獨立：占卜區問一件具體的事；命盤區看先天格局；流年運勢區看目前與未來的運勢。互不混用。</p>
   </header>
 
@@ -57,7 +67,7 @@
   <!-- ==================== 占卜區 ==================== -->
   <div id="tabDivine" role="tabpanel" aria-labelledby="tabBtn-divine" class="space-y-8">
   <section class="rounded-2xl p-5 md:p-6 gold-border space-y-5" style="background:var(--panel)">
-    <h2 class="text-xl font-bold text-amber-300">Ⅰ. 所問之事</h2>
+    <h2 class="text-xl font-bold text-amber-300"><span class="sec-num"></span>所問之事</h2>
     <p class="text-xs text-stone-400">占卜只回答這一件事，不混入命盤與流年。</p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div><label for="questionCategory" class="block text-xs text-amber-200/80 mb-1">問題類別</label>
@@ -83,7 +93,7 @@
         <input type="number" id="meihuaB" min="1" inputmode="numeric" placeholder="第二個數" class="w-24 bg-slate-950/80 border border-amber-500/30 rounded-lg px-2 py-1 text-sm">
       </div>
     </fieldset>
-    <p id="askerLine" class="text-xs text-stone-500"></p>
+    <p id="askerLine" class="text-xs text-stone-400"></p>
   </section>
 
   <section id="lockSection" class="rounded-2xl p-5 md:p-6 gold-border space-y-3" style="background:var(--panel)">
@@ -96,11 +106,11 @@
           <option value="instant">即時定局（精確到秒）</option>
           <option value="random">不定局（純隨機）</option>
         </select>
-        <button id="lockBtn" class="text-sm px-4 py-1.5 rounded-lg border border-amber-500/60 text-amber-200 hover:bg-amber-500/20 font-bold">定局</button>
+        <button id="lockBtn" type="button" class="text-sm px-4 py-1.5 rounded-lg border border-amber-500/60 text-amber-200 hover:bg-amber-500/20 font-bold">定局</button>
       </div>
     </div>
     <p class="text-xs text-stone-400">抽牌、擲卦前先以當下的奇門遁甲時家局定住時空：天時（奇門局）＋人（你的生辰）＋事（你的問題）一起決定抽到的牌與卦。時辰定局下，同一個時辰問同一件事，結果不會變。</p>
-    <div id="lockInfo" class="text-xs text-stone-300 bg-slate-950/60 p-3 rounded-lg border border-amber-500/20">尚未定局。輸入問題後按「定局」，或直接抽牌、擲卦時會自動定局。</div>
+    <div id="lockInfo" class="text-xs text-stone-300 bg-slate-950/60 p-3 rounded-lg border border-amber-500/20 min-h-[4.5rem]" aria-live="polite">尚未定局。輸入問題後按「定局」，或直接抽牌、擲卦時會自動定局。</div>
   </section>
 
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="divGrid">
@@ -108,8 +118,8 @@
     <section id="tarotSection" class="rounded-2xl p-5 md:p-6 gold-border flex flex-col gap-4 min-w-0" style="background:var(--panel)">
       <div class="space-y-2">
         <div class="flex items-center justify-between gap-2">
-          <h2 class="text-xl font-bold text-amber-300">Ⅱ. 偉特塔羅・四象陣</h2>
-          <button id="resetTarotBtn" class="text-xs px-3 py-1 rounded border border-amber-500/40 text-amber-300 hover:bg-amber-500/20">蓋回牌面</button>
+          <h2 class="text-xl font-bold text-amber-300"><span class="sec-num"></span>偉特塔羅・四象陣</h2>
+          <button id="resetTarotBtn" type="button" class="text-xs px-3 py-1 rounded border border-amber-500/40 text-amber-300 hover:bg-amber-500/20">蓋回牌面</button>
         </div>
         <p class="text-xs text-stone-400">默念問題，依序點 4 張牌背翻牌（78 張牌，牌序與正逆位由時空定局決定）。</p>
       </div>
@@ -121,8 +131,8 @@
     <section id="ichingSection" class="rounded-2xl p-5 md:p-6 gold-border flex flex-col gap-4 min-w-0" style="background:var(--panel)">
       <div class="space-y-2">
         <div class="flex items-center justify-between gap-2">
-          <h2 class="text-xl font-bold text-amber-300">Ⅲ. 易經・金錢六爻</h2>
-          <button id="resetIChingBtn" class="text-xs px-3 py-1 rounded border border-amber-500/40 text-amber-300 hover:bg-amber-500/20">清空卦象</button>
+          <h2 class="text-xl font-bold text-amber-300"><span class="sec-num"></span>易經・金錢六爻</h2>
+          <button id="resetIChingBtn" type="button" class="text-xs px-3 py-1 rounded border border-amber-500/40 text-amber-300 hover:bg-amber-500/20">清空卦象</button>
         </div>
         <p class="text-xs text-stone-400">三枚銅錢，由下而上擲 6 次（初爻到上爻），每一爻由時空定局決定，自動算出本卦、互卦、變卦。</p>
       </div>
@@ -139,12 +149,12 @@
   </div>
 
   <section id="chartSection" class="rounded-2xl p-5 md:p-6 gold-border space-y-4" style="background:var(--panel)">
-    <h2 class="text-xl font-bold text-amber-300">Ⅳ. 奇門遁甲盤・梅花易數</h2>
+    <h2 class="text-xl font-bold text-amber-300"><span class="sec-num"></span>奇門遁甲盤・梅花易數</h2>
     <p id="chartHint" class="text-xs text-stone-400">按上方「定局」後，這裡會排出當下的奇門遁甲盤與梅花易數卦象。</p>
     <div id="qimenBox" class="space-y-3" hidden>
       <div id="qimenHead" class="text-xs text-stone-300 leading-6"></div>
       <div id="qimenGrid" class="grid grid-cols-3 gap-2"></div>
-      <p class="text-[11px] text-stone-500">每宮由上而下：八神、九星、八門、天盤干／地盤干。金框是你（日干）落的宮，紫框是所問之事（時干）落的宮。</p>
+      <p class="text-xs text-stone-400">每宮由上而下：八神、九星、八門、天盤干／地盤干。金框是你（日干）落的宮，紫框是所問之事（時干）落的宮。</p>
     </div>
     <div id="meihuaBox" class="text-xs text-stone-300 bg-slate-950/60 p-3 rounded-lg border border-amber-500/20 leading-6" style="white-space:pre-wrap" hidden></div>
   </section>
@@ -152,7 +162,7 @@
   <section id="readSection" class="rounded-2xl p-5 md:p-6 gold-border space-y-4" style="background:var(--panel)">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
       <div class="min-w-0">
-        <h2 class="text-xl font-bold text-amber-300">Ⅴ. 直接解讀</h2>
+        <h2 class="text-xl font-bold text-amber-300"><span class="sec-num"></span>直接解讀</h2>
         <p class="text-xs text-stone-400">把勾選的塔羅、易經、奇門遁甲、梅花易數交給 Claude 解讀，結果直接顯示在這裡。會用到你的 Claude 用量，第一次會先詢問是否允許。</p>
       </div>
       <div class="flex gap-2 shrink-0">
@@ -167,8 +177,8 @@
   <section class="rounded-2xl p-5 md:p-6 gold-border space-y-4" style="background:rgba(15,23,42,0.8)">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
       <div class="min-w-0">
-        <h2 class="text-xl font-bold text-amber-300">Ⅵ. 占卜指令（貼給 Claude Code）</h2>
-        <p class="text-xs text-stone-400">想要更深入、可以接著追問的版本時用：複製後貼到 Claude Code。內容只有這次占卜，不含命盤與流年。</p>
+        <h2 class="text-xl font-bold text-amber-300"><span class="sec-num"></span>占卜指令（貼給 Claude）</h2>
+        <p class="text-xs text-stone-400">牌、卦、盤都已排好寫進指令裡：複製後貼到任何 Claude 對話（網頁版、App、Claude Code 都可以），還能接著追問。內容只有這次占卜，不含命盤與流年。</p>
       </div>
       <button id="copyBtn" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow-md shrink-0">複製指令</button>
     </div>
@@ -189,8 +199,8 @@
       <div><label for="userName" class="block text-xs text-amber-200/80 mb-1">姓名／代號</label>
         <input type="text" id="userName" placeholder="例如：Alex" class="w-full bg-slate-950/80 border border-amber-500/30 rounded-lg px-3 py-2 text-sm"></div>
       <div><label for="birthDate" class="block text-xs text-amber-200/80 mb-1">出生日期（國曆）</label>
-        <input type="date" id="birthDate" class="w-full bg-slate-950/80 border border-amber-500/30 rounded-lg px-3 py-2 text-sm"></div>
-      <div><label for="birthTime" class="block text-xs text-amber-200/80 mb-1">出生時間（24 時制，不知道就留空）</label>
+        <input type="date" id="birthDate" min="1901-01-01" max="2099-12-31" class="w-full bg-slate-950/80 border border-amber-500/30 rounded-lg px-3 py-2 text-sm"></div>
+      <div><label for="birthTime" class="block text-xs text-amber-200/80 mb-1">出生時間（不知道就留空）</label>
         <input type="time" id="birthTime" class="w-full bg-slate-950/80 border border-amber-500/30 rounded-lg px-3 py-2 text-sm"></div>
       <div><label for="gender" class="block text-xs text-amber-200/80 mb-1">生理性別</label>
         <select id="gender" class="w-full bg-slate-950/80 border border-amber-500/30 rounded-lg px-3 py-2 text-sm"><option value="M">男</option><option value="F">女</option></select></div>
@@ -208,7 +218,19 @@
           <option value="22.99,120.21,8|台南市">台南市（22.99°N, 120.21°E）</option>
           <option value="22.62,120.30,8|高雄市">高雄市（22.62°N, 120.30°E）</option>
           <option value="22.32,114.17,8|香港">香港（22.32°N, 114.17°E）</option>
-        </select></div>
+          <option value="custom">其他地點（自填經緯度）</option>
+        </select>
+        <div id="customCityRow" class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-2" hidden>
+          <input type="text" id="customCityName" placeholder="地名" aria-label="自訂地名" class="col-span-2 sm:col-span-1 bg-slate-950/80 border border-amber-500/30 rounded-lg px-2 py-1.5 text-sm">
+          <input type="number" id="customLat" step="0.01" min="-90" max="90" placeholder="緯度（北為正）" aria-label="緯度" class="bg-slate-950/80 border border-amber-500/30 rounded-lg px-2 py-1.5 text-sm">
+          <input type="number" id="customLon" step="0.01" min="-180" max="180" placeholder="經度（東為正）" aria-label="經度" class="bg-slate-950/80 border border-amber-500/30 rounded-lg px-2 py-1.5 text-sm">
+          <select id="customTz" aria-label="時區" class="col-span-2 sm:col-span-1 bg-slate-950/80 border border-amber-500/30 rounded-lg px-2 py-1.5 text-sm">
+            <option>Asia/Taipei</option><option>Asia/Hong_Kong</option><option>Asia/Shanghai</option><option>Asia/Macau</option>
+            <option>Asia/Singapore</option><option>Asia/Kuala_Lumpur</option><option>Asia/Tokyo</option><option>Asia/Seoul</option>
+            <option>Australia/Sydney</option><option>Europe/London</option><option>America/Los_Angeles</option><option>America/New_York</option>
+            <option>America/Vancouver</option><option>America/Toronto</option>
+          </select>
+        </div></div>
       <fieldset class="rounded-xl border border-amber-500/20 px-4 pb-3 pt-1">
         <legend class="px-2 text-xs text-amber-200/80">用哪些命盤系統</legend>
         <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
@@ -222,8 +244,8 @@
   <section class="rounded-2xl p-5 md:p-6 gold-border space-y-4" style="background:rgba(15,23,42,0.8)">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
       <div class="min-w-0">
-        <h2 class="text-xl font-bold text-amber-300">Ⅱ. 命盤指令（貼給 Claude Code）</h2>
-        <p class="text-xs text-stone-400">命盤要用你電腦上的排盤程式計算，所以由 Claude Code 排盤並解讀。</p>
+        <h2 class="text-xl font-bold text-amber-300">Ⅱ. 命盤指令（貼給 Claude）</h2>
+        <p class="text-xs text-stone-400">八字由本頁直接排好寫進指令，貼到任何 Claude 對話都能解讀。西洋占星與紫微斗數需要排盤程式：有 astrology-master 技能的 Claude Code 會先跑腳本；沒有的話，Claude 只會解讀八字。</p>
       </div>
       <button id="natalCopy" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow-md shrink-0">複製指令</button>
     </div>
@@ -240,7 +262,7 @@
     <p id="fortuneWho" class="text-xs text-stone-300"></p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div><label for="fortuneDate" class="block text-xs text-amber-200/80 mb-1">基準日（預設今天；想看明年可改成明年的日期）</label>
-        <input type="date" id="fortuneDate" class="w-full bg-slate-950/80 border border-amber-500/30 rounded-lg px-3 py-2 text-sm"></div>
+        <input type="date" id="fortuneDate" min="1901-01-01" max="2099-12-31" class="w-full bg-slate-950/80 border border-amber-500/30 rounded-lg px-3 py-2 text-sm"></div>
       <fieldset class="rounded-xl border border-amber-500/20 px-4 pb-3 pt-1">
         <legend class="px-2 text-xs text-amber-200/80">用哪些系統看運勢</legend>
         <div class="flex flex-col gap-y-2 text-sm">
@@ -254,8 +276,8 @@
   <section class="rounded-2xl p-5 md:p-6 gold-border space-y-4" style="background:rgba(15,23,42,0.8)">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
       <div class="min-w-0">
-        <h2 class="text-xl font-bold text-amber-300">Ⅱ. 流年運勢指令（貼給 Claude Code）</h2>
-        <p class="text-xs text-stone-400">運勢同樣由 Claude Code 排盤並解讀。</p>
+        <h2 class="text-xl font-bold text-amber-300">Ⅱ. 流年運勢指令（貼給 Claude）</h2>
+        <p class="text-xs text-stone-400">八字的大運與流年由本頁排好寫進指令；占星與紫微同樣需要 astrology-master 技能，沒有的話 Claude 只會解讀八字。</p>
       </div>
       <button id="fortuneCopy" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow-md shrink-0">複製指令</button>
     </div>
@@ -263,11 +285,19 @@
     <textarea id="fortunePrompt" rows="10" readonly class="w-full bg-slate-950 border border-amber-500/30 rounded-xl p-4 text-xs font-mono text-amber-100/90 leading-relaxed"></textarea>
   </section>
   </div>
+
+  <footer class="border-t border-amber-500/20 pt-6 pb-2 text-center space-y-3 text-xs text-stone-400">
+    <p>占卜與命理是象徵性的參考，不是預測或專業建議。投資理財、醫療、法律等重要決定，請另外諮詢專業人士。</p>
+    <p>出生資料與占卜紀錄只存在你這台裝置的瀏覽器裡，不會上傳。只有在你按「開始解讀」或自行貼出指令時，內容才會交給 Claude。</p>
+    <p><button id="clearDataBtn" type="button" class="px-3 py-1 rounded border border-stone-600 text-stone-300 hover:border-rose-400 hover:text-rose-200">清除本機資料</button>
+      <span id="clearDataNote" class="ml-2" aria-live="polite"></span></p>
+  </footer>
 </div>
 
 <script>
 // ---------- 奇門遁甲（時家、轉盤、拆補法）、梅花易數、時空定局亂數 ----------
-// 與 scripts/qimen.py、meihua.py、draw.py 是同一套算法；改這裡要同步改那邊並重跑比對。
+// 與 astrology-master 技能的 scripts/qimen.py、meihua.py、draw.py 同源；占卜區的指令已不再呼叫腳本，
+// 但兩邊若要繼續對照，改這裡要同步改那邊（2026-11 起：問題文字正規化、生辰才算性別、23 點後梅花換日）。
 const QM = (() => {
   const GAN = "甲乙丙丁戊己庚辛壬癸", ZHI = "子丑寅卯辰巳午未申酉戌亥";
   const JIAZI = Array.from({ length: 60 }, (_, i) => GAN[i % 10] + ZHI[i % 12]);
@@ -411,7 +441,9 @@ const QM = (() => {
              huPair: [BITS_GUA[hu.slice(3)], BITS_GUA[hu.slice(0, 3)]] };
   }
   function mhByTime(d, SolarLib) {
-    const lunar = SolarLib.fromYmdHms(d.getFullYear(), d.getMonth() + 1, d.getDate(), d.getHours(), d.getMinutes(), 0).getLunar();
+    // 23 點起已是隔天的子時：和奇門日柱（setSect(1)）一致，農曆日期也算隔天
+    const b = d.getHours() === 23 ? new Date(d.getTime() + 3600 * 1000) : d;
+    const lunar = SolarLib.fromYmdHms(b.getFullYear(), b.getMonth() + 1, b.getDate(), b.getHours(), b.getMinutes(), 0).getLunar();
     const yz = lunar.getYearZhi(), tz = lunar.getTimeZhi();
     const y = ZHI.indexOf(yz) + 1, m = Math.abs(lunar.getMonth()), dd = lunar.getDay(), h = ZHI.indexOf(tz) + 1;
     const up = (y + m + dd) % 8 || 8, low = (y + m + dd + h) % 8 || 8, mv = (y + m + dd + h) % 6 || 6;
@@ -443,8 +475,12 @@ const QM = (() => {
   }
 
   // ---------- 時空定局亂數 ----------
+  // 問題正規化：全半形統一、去掉空白與標點，「同一句話」多個問號或空格仍是同一問
+  function normQ(q) {
+    return String(q || "").normalize("NFKC").replace(/[\s\p{P}\p{S}]+/gu, "").toLowerCase();
+  }
   function seedString(p, birth, gender, question, instantTs) {
-    const s = `${p.gz.join("")}|${p.yang ? "陽" : "陰"}${p.ju}|${p.zhifu}${p.zhifuPalace}|${p.zhishi}${p.zhishiPalace}|${birth}|${gender}|${question.trim()}`;
+    const s = `${p.gz.join("")}|${p.yang ? "陽" : "陰"}${p.ju}|${p.zhifu}${p.zhifuPalace}|${p.zhishi}${p.zhishiPalace}|${birth}|${birth ? gender : ""}|${normQ(question)}`;
     return s + (instantTs ? `|${instantTs}` : "");
   }
   function cyrb128(str) {
@@ -492,7 +528,7 @@ const QM = (() => {
     return { cards, yaos };
   }
 
-  return { pan, render, palaceMarks, seedString, draw, PALACE, PALACE_WX, mhByTime, mhByNumbers, mhRender, GUA };
+  return { pan, render, palaceMarks, seedString, normQ, draw, PALACE, PALACE_WX, mhByTime, mhByNumbers, mhRender, GUA };
 })();
 
 // ---------- 隨機數（crypto） ----------
@@ -513,10 +549,12 @@ const MAJOR_ARCANA = [
   ["XVIII. 月亮 (The Moon)", "水"], ["XIX. 太陽 (The Sun)", "火"], ["XX. 審判 (Judgement)", "火"],
   ["XXI. 世界 (The World)", "土"]
 ].map(([name, el]) => ({ name, el }));
-const SUITS = [{ suit: "權杖", el: "火" }, { suit: "聖杯", el: "水" }, { suit: "寶劍", el: "風" }, { suit: "錢幣", el: "土" }];
-const RANKS = ["王牌 (Ace)", "二", "三", "四", "五", "六", "七", "八", "九", "十", "侍者 (Page)", "騎士 (Knight)", "皇后 (Queen)", "國王 (King)"];
+// 牌庫順序（大牌 0–21，接著權杖、聖杯、寶劍、錢幣各 14 張）決定定局抽到哪張，不要調動
+const SUITS = [{ suit: "權杖", en: "Wands", el: "火" }, { suit: "聖杯", en: "Cups", el: "水" }, { suit: "寶劍", en: "Swords", el: "風" }, { suit: "錢幣", en: "Pentacles", el: "土" }];
+const RANKS = [["王牌", "Ace"], ["二", "Two"], ["三", "Three"], ["四", "Four"], ["五", "Five"], ["六", "Six"], ["七", "Seven"], ["八", "Eight"], ["九", "Nine"], ["十", "Ten"],
+               ["侍者", "Page"], ["騎士", "Knight"], ["王后", "Queen"], ["國王", "King"]];
 const DECK = [...MAJOR_ARCANA];
-SUITS.forEach(s => RANKS.forEach(r => DECK.push({ name: `${s.suit}${r}`, el: s.el })));
+SUITS.forEach(s => RANKS.forEach(([zh, en]) => DECK.push({ name: `${s.suit}${zh} (${en} of ${s.en})`, el: s.el })));
 const POS = [
   { title: "1. 過去根源", desc: "事件起因與潛在基礎" },
   { title: "2. 現況核心", desc: "當下處境與心理狀態" },
@@ -540,7 +578,7 @@ const HEX = {
 "111000":[11,"地天泰","小往大來，吉亨。天地交泰，陰陽調和，萬事亨通。"],
 "000111":[12,"天地否","否之匪人，不利君子貞，大往小來。上下不交、溝通阻塞，宜守不宜進。"],
 "101111":[13,"天火同人","同人于野，亨，利涉大川。志同道合、公開透明合作則無往不利。"],
-"111101":[14,"火天大有","元亨。日中天，資源豐盛、順天應人，大有收穫。"],
+"111101":[14,"火天大有","元亨。如日中天，資源豐盛、順天應人，大有收穫。"],
 "001000":[15,"地山謙","亨，君子有終。謙卑退讓反得尊榮，低調行事必有善終。"],
 "000100":[16,"雷地豫","利建侯行師。順勢而動、提前預備，宜把握時機鼓舞人心。"],
 "100110":[17,"澤雷隨","元亨利貞，無咎。審時度勢、隨機應變，放下執念順勢而行。"],
@@ -597,12 +635,13 @@ let yaos = [];
 
 // ---------- 記憶（僅本瀏覽器） ----------
 const KEY = "fiveArtsUserProfile";
+const PROFILE_IDS = ["userName", "birthDate", "birthTime", "gender", "birthCity", "customCityName", "customLat", "customLon", "customTz"];
 function loadProfile() {
   try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { return {}; }
 }
 function saveProfile() {
   const p = {};
-  ["userName", "birthDate", "birthTime", "gender", "birthCity"].forEach(id => p[id] = $(id).value);
+  PROFILE_IDS.forEach(id => p[id] = $(id).value);
   try {
     localStorage.setItem(KEY, JSON.stringify(p));
     const s = $("saveStatus"); s.style.opacity = "1"; setTimeout(() => s.style.opacity = "0", 1800);
@@ -626,7 +665,8 @@ function renderTarot() {
     } else {
       el.className = "card-front rounded-xl p-3 h-44 flex flex-col justify-between text-center";
       el.innerHTML = `<span class="text-[11px] font-bold text-amber-400 border-b border-amber-500/30 pb-1">${pos.title}</span>
-        <div class="my-auto"><p class="text-sm font-bold text-white leading-snug">${c.name}</p>
+        <div class="my-auto"><p class="text-sm font-bold text-white leading-snug">${c.name.split(" (")[0]}</p>
+        <p class="text-[10px] text-stone-300 leading-tight">${c.name.includes(" (") ? c.name.split(" (")[1].replace(")", "") : ""}</p>
         <span class="inline-block mt-1 text-xs font-bold px-2 py-0.5 rounded ${c.reversed ? "bg-rose-900/70 text-rose-200" : "bg-emerald-900/70 text-emerald-200"}">${c.reversed ? "逆位" : "正位"}</span></div>
         <span class="text-[10px] text-amber-200/70">元素：${c.el}</span>`;
     }
@@ -640,7 +680,7 @@ function stamp(d) {
   askTime = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
   $("currentTimestamp").value = askTime;
 }
-let lock = null;   // { mode, question, pan, drawn: { cards, yaos } }
+let lock = null;   // { mode, requested, fellBack, question, qNorm, birthKey, pan, drawn: { cards, yaos }, date }
 const MODE_NAME = { shichen: "時辰定局（同一時辰、同一人、同一問題結果固定，一事不二占）", instant: "即時定局（精確到秒，每次不同）", random: "不定局（純隨機）" };
 function randomDraw() {
   const order = DECK.map((_, i) => i);
@@ -651,14 +691,29 @@ function randomDraw() {
 function panText(p) {
   return `${p.yang ? "陽" : "陰"}遁${p.ju}局（${p.jieqi}${p.yuan}元），日時 ${p.gz[2]} ${p.gz[3]}，值符${p.zhifu}落${QM.PALACE[p.zhifuPalace]}，值使${p.zhishi}落${QM.PALACE[p.zhishiPalace]}，旬空${p.kong}`;
 }
+// 會影響定局結果的生辰（沒填出生日期時，性別也不算進去）
+function birthKeyNow() {
+  const bd = $("birthDate").value, bt = $("birthTime").value;
+  return bd ? `${bd}${bt ? " " + bt : ""}|${$("gender").value}` : "";
+}
+// 定局後又改了哪些會影響結果的東西
+function lockIssues() {
+  if (!lock) return [];
+  const t = [];
+  if (QM.normQ($("questionText").value) !== lock.qNorm) t.push("問題已修改");
+  if ($("lockMode").value !== lock.requested) t.push("定局方式已更改");
+  else if (lock.mode !== "random" && birthKeyNow() !== lock.birthKey) t.push("生辰或性別已修改");
+  return t;
+}
 function renderLockInfo(msg) {
   const el = $("lockInfo");
   if (msg) { el.innerHTML = `<span class="text-rose-300">${msg}</span>`; return; }
   if (!lock) { el.textContent = "尚未定局。輸入問題後按「定局」，或直接抽牌、擲卦時會自動定局。"; return; }
-  const changed = $("questionText").value.trim() !== lock.question;
+  const issues = lockIssues();
   el.innerHTML = `<p><span class="text-emerald-300 font-bold">已定局</span>｜${askTime}｜${lock.pan ? panText(lock.pan) : "曆法程式未載入，無法排奇門局"}</p>
     <p class="mt-1 text-stone-400">定局方式：${MODE_NAME[lock.mode]}</p>` +
-    (changed ? `<p class="mt-1 text-rose-300">問題已修改，和定局時不同；請再按一次「定局」。</p>` : "");
+    (lock.fellBack ? `<p class="mt-1 text-rose-300">曆法程式沒有載入（可能是網路擋住了 cdn.jsdelivr.net），這次改用純隨機，奇門盤與梅花易數也無法排出。重新整理頁面後再定局一次即可。</p>` : "") +
+    (issues.length ? `<p class="mt-1 text-rose-300">${issues.join("、")}，和定局時不同；目前的牌與卦仍是舊的局，要套用請再按一次「定局」。</p>` : "");
 }
 function clearBoards() {
   tarotDrawn = [null, null, null, null]; renderTarot();
@@ -673,22 +728,72 @@ function doLock() {
   if (!q) { renderLockInfo("請先輸入具體問題再定局（問題會一起算進定局裡）。"); $("questionText").focus(); return false; }
   const d = new Date();
   stamp(d);
-  let mode = $("lockMode").value, pan = null;
+  const requested = $("lockMode").value;
+  let mode = requested, pan = null;
   try { pan = QM.pan(d, Solar); } catch (e) { pan = null; }
   let drawn;
+  const bd = $("birthDate").value, bt = $("birthTime").value;
   if (mode !== "random" && pan) {
-    const bd = $("birthDate").value, bt = $("birthTime").value;
     const seed = QM.seedString(pan, bd ? bd + (bt ? " " + bt : "") : "", $("gender").value, q,
       mode === "instant" ? `${askTime}:${pad(d.getSeconds())}` : null);
     drawn = QM.draw(seed, DECK.length);
   } else {
-    if (mode !== "random") mode = "random";
+    mode = "random";
     drawn = randomDraw();
   }
   clearBoards();
-  lock = { mode, question: q, pan, drawn, date: d };
+  lock = { mode, requested, fellBack: requested !== "random" && !pan, question: q, qNorm: QM.normQ(q), birthKey: birthKeyNow(), pan, drawn, date: d };
   renderLockInfo(); updatePrompt();
   return true;
+}
+// 已經抽了牌或擲了卦時，重新定局要按兩次（避免一按就清空）
+let relockArmed = null;
+function onLockClick() {
+  const btn = $("lockBtn");
+  const hasWork = lock && (tarotDrawn.some(Boolean) || yaos.length);
+  if (hasWork && !relockArmed) {
+    btn.textContent = "再按一次確認（會清掉已抽的牌與卦）";
+    relockArmed = setTimeout(() => { relockArmed = null; btn.textContent = "定局"; }, 4000);
+    return;
+  }
+  clearTimeout(relockArmed); relockArmed = null; btn.textContent = "定局";
+  doLock();
+}
+// 依 lock 與已翻開的張數、已擲的爻數重畫兩塊板子（重新整理後還原用）
+function syncBoards() {
+  renderTarot(); tarotSummary(); renderYao();
+  const btn = $("castBtn");
+  if (yaos.length >= 6) { btn.textContent = "六爻已完成"; btn.disabled = true; btn.classList.add("opacity-50", "cursor-not-allowed"); ichingSummary(); }
+  else { btn.textContent = `擲第 ${yaos.length + 1} 爻（${YAO[yaos.length]}）`; btn.disabled = false; btn.classList.remove("opacity-50", "cursor-not-allowed"); }
+  if (yaos.length) $("coinLog").textContent = `已擲 ${yaos.length}/6 爻`;
+}
+// ---------- 這次占卜的記憶（僅本瀏覽器，重新整理後還原） ----------
+const DIV_KEY = "fiveArtsDivination";
+function saveDivination() {
+  const o = { qText: $("questionText").value, cat: $("questionCategory").value, mA: $("meihuaA").value, mB: $("meihuaB").value, lock: null };
+  if (lock) o.lock = { mode: lock.mode, requested: lock.requested, fellBack: lock.fellBack, question: lock.question, birthKey: lock.birthKey,
+                       date: lock.date.getTime(), drawn: lock.drawn, flipped: tarotDrawn.map(Boolean), nYao: yaos.length };
+  try { localStorage.setItem(DIV_KEY, JSON.stringify(o)); } catch (e) {}
+}
+function restoreDivination() {
+  let o = null;
+  try { o = JSON.parse(localStorage.getItem(DIV_KEY) || "null"); } catch (e) { o = null; }
+  if (!o) return;
+  if (typeof o.qText === "string") $("questionText").value = o.qText;
+  if (o.cat) $("questionCategory").value = o.cat;
+  if (o.mA) $("meihuaA").value = o.mA;
+  if (o.mB) $("meihuaB").value = o.mB;
+  const L = o.lock;
+  if (!L || !L.drawn || !Array.isArray(L.drawn.cards) || !Array.isArray(L.drawn.yaos)) return;
+  const d = new Date(L.date);
+  let pan = null;
+  try { pan = QM.pan(d, Solar); } catch (e) { pan = null; }
+  lock = { mode: L.mode, requested: L.requested || L.mode, fellBack: !!L.fellBack, question: L.question, qNorm: QM.normQ(L.question),
+           birthKey: L.birthKey || "", pan, drawn: L.drawn, date: d };
+  stamp(d);
+  tarotDrawn = [0, 1, 2, 3].map(i => (L.flipped && L.flipped[i]) ? { ...DECK[L.drawn.cards[i].index], reversed: L.drawn.cards[i].reversed } : null);
+  yaos = L.drawn.yaos.slice(0, Math.min(6, L.nYao || 0));
+  syncBoards();
 }
 const SYS = ["sysAstro", "sysBazi", "sysZiwei", "sysTarot", "sysIching", "sysQimen", "sysMeihua", "fAstro", "fBazi", "fZiwei"];
 const on = id => $(id).checked;
@@ -696,8 +801,19 @@ function applyToggles() {
   $("tarotSection").hidden = !on("sysTarot");
   $("ichingSection").hidden = !on("sysIching");
   $("divGrid").hidden = !on("sysTarot") && !on("sysIching");
+  // 只剩一個系統時改成單欄，不要只佔半寬
+  $("divGrid").classList.toggle("lg:grid-cols-2", on("sysTarot") && on("sysIching"));
   $("meihuaNumsRow").hidden = !on("sysMeihua");
   $("chartSection").hidden = !on("sysQimen") && !on("sysMeihua");
+  $("customCityRow").hidden = $("birthCity").value !== "custom";
+  // 依目前顯示的區塊重新編號，避免取消勾選後跳號
+  const NUMS = ["Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ", "Ⅵ", "Ⅶ", "Ⅷ"];
+  let k = 0;
+  document.querySelectorAll("#tabDivine .sec-num").forEach(s => {
+    const sec = s.closest("section");
+    const shown = !sec.hidden && !(sec.parentElement && sec.parentElement.hidden);
+    s.textContent = shown ? `${NUMS[k++]}. ` : "";
+  });
 }
 function drawCard(i) {
   if (tarotDrawn[i]) return;
@@ -726,7 +842,7 @@ function renderYao() {
     row.className = "flex items-center gap-3 text-xs";
     const label = `<span class="w-10 text-stone-400 shrink-0">${YAO[i]}</span>`;
     if (!v) {
-      row.innerHTML = `${label}<div class="flex-1 h-3 border border-dashed border-stone-700 rounded"></div><span class="w-14 text-right text-stone-600">未擲</span>`;
+      row.innerHTML = `${label}<div class="flex-1 h-3 border border-dashed border-stone-600 rounded"></div><span class="w-14 text-right text-stone-500">未擲</span>`;
     } else {
       const yang = v === 7 || v === 9, mov = v === 6 || v === 9;
       const bar = yang ? `<div class="flex-1 yao-yang${mov ? " moving" : ""}"></div>`
@@ -768,9 +884,13 @@ function analysis() {
 }
 function ichingSummary() {
   const r = analysis(); if (!r) return;
-  const mv = r.moving.length ? r.moving.join("、") : "無動爻（六爻皆靜）";
-  $("ichingSummary").innerHTML = `<div class="text-left space-y-1">
-    <p><span class="text-amber-300 font-bold">本卦：第 ${r.ben.num} 卦 ${r.ben.name}</span>｜<span class="text-purple-300">互卦：${r.hu.name}</span>｜<span class="text-emerald-300 font-bold">變卦：第 ${r.bian.num} 卦 ${r.bian.name}</span></p>
+  const still = !r.moving.length;
+  const mv = still ? "無動爻（六爻皆靜，看本卦卦辭）" : r.moving.join("、");
+  $("ichingSummary").innerHTML = `<div class="text-left space-y-2 leading-5">
+    <p><span class="text-amber-300 font-bold">本卦：第 ${r.ben.num} 卦 ${r.ben.name}</span><br><span class="text-stone-300">${r.ben.text}</span></p>
+    <p><span class="text-purple-300 font-bold">互卦：第 ${r.hu.num} 卦 ${r.hu.name}</span><br><span class="text-stone-300">${r.hu.text}</span></p>
+    ${still ? `<p class="text-emerald-300 font-bold">變卦：無（沒有動爻，不變卦）</p>`
+            : `<p><span class="text-emerald-300 font-bold">變卦：第 ${r.bian.num} 卦 ${r.bian.name}</span><br><span class="text-stone-300">${r.bian.text}</span></p>`}
     <p class="text-rose-300">動爻：${mv}</p></div>`;
 }
 
@@ -780,7 +900,12 @@ function getMeihua() {
   const a = parseInt($("meihuaA").value, 10), b = parseInt($("meihuaB").value, 10);
   try { return (a > 0 && b > 0) ? QM.mhByNumbers(a, b, lock.date, Solar) : QM.mhByTime(lock.date, Solar); } catch (e) { return null; }
 }
-function meihuaText() { const r = getMeihua(); return r ? QM.mhRender(r, hex) : ""; }
+function meihuaText() {
+  const r = getMeihua(); if (!r) return "";
+  const a = parseInt($("meihuaA").value, 10) > 0, b = parseInt($("meihuaB").value, 10) > 0;
+  const note = (a !== b) ? "（只填了一個數字，報數要兩個；這次改用時間起卦）\n" : "";
+  return note + QM.mhRender(r, hex);
+}
 function renderDivination() {
   const showQ = on("sysQimen") && lock && lock.pan, mh = on("sysMeihua") ? meihuaText() : "";
   $("chartHint").hidden = !!(showQ || mh);
@@ -803,7 +928,7 @@ function renderDivination() {
       cell.className = "rounded-lg border p-2 text-[11px] leading-5 min-w-0 " + (me ? "border-amber-400 bg-amber-500/10" : it ? "border-purple-400 bg-purple-500/10" : "border-amber-500/20 bg-slate-950/50");
       const marks = QM.palaceMarks(r, p);
       const who = [me ? "你" : "", it ? "此事" : "", p === r.zhifuPalace ? "值符" : "", p === r.zhishiPalace ? "值使" : ""].filter(Boolean);
-      cell.innerHTML = `<div class="flex flex-wrap justify-between gap-x-1"><span class="font-bold text-amber-300">${name}</span><span class="text-stone-500">${dir}・${QM.PALACE_WX[p]}</span></div>
+      cell.innerHTML = `<div class="flex flex-wrap justify-between gap-x-1"><span class="font-bold text-amber-300">${name}</span><span class="text-stone-400">${dir}・${QM.PALACE_WX[p]}</span></div>
         <div>${r.gods[p]}</div><div>${r.stars[p]}${p === r.ruiPalace ? "＋禽" : ""}</div><div class="text-amber-100">${r.doors[p]}</div>
         <div>天 ${r.sky[p]}${p === r.ruiPalace ? "、" + r.earth[5] : ""}／地 ${r.earth[p]}</div>` +
         (marks.length ? `<div class="text-rose-300">${marks.join("・")}</div>` : "") +
@@ -828,35 +953,43 @@ const READ_ERR = {
   prompt_too_large: "送出的內容太長，請縮短問題。",
   upstream_error: "連線中斷，上面是已收到的部分；可以再按一次。"
 };
-function readTodo() {
+// 占卜還缺什麼（頁面內解讀與複製指令共用）
+function divTodo() {
   const t = [], q = $("questionText").value.trim();
   if (!on("sysTarot") && !on("sysIching") && !on("sysQimen") && !on("sysMeihua")) t.push("至少勾選一個占卜系統");
-  if (!q) t.push("輸入具體問題");
-  if (!lock) t.push("按「定局」");
-  else if (lock.question !== q) t.push("問題已修改，請重新定局");
+  if (!q) t.push("具體問題");
+  else if (!lock) t.push("按「定局」");
+  else lockIssues().forEach(x => t.push(x + "，請重新定局"));
   const n = tarotDrawn.filter(Boolean).length;
   if (on("sysTarot") && n < 4) t.push(`塔羅（已抽 ${n}/4）`);
   if (on("sysIching") && yaos.length < 6) t.push(`易經（已擲 ${yaos.length}/6）`);
   return t;
 }
+// 占卜的完整提示：牌、卦、盤都由本頁排好寫進去，不需要任何本機腳本，貼到哪個 Claude 都能解讀
 function buildReadInput() {
   const used = [], data = [], rules = [];
-  data.push(`【所問之事】\n類別：${$("questionCategory").value}\n問題：${lock.question}`);
-  data.push(`【時空定局】\n定局時間：${askTime}\n奇門時空局：${lock.pan ? panText(lock.pan) : "（未能排出）"}\n定局方式：${MODE_NAME[lock.mode]}`);
+  const qText = $("questionText").value.trim();
+  data.push(`【所問之事】\n占卜時間：${askTime}\n類別：${$("questionCategory").value}\n問題：${qText || "（尚未輸入）"}`);
+  if (lock) data.push(`【時空定局】\n定局時間：${askTime}\n奇門時空局：${lock.pan ? panText(lock.pan) : "（未能排出）"}\n定局方式：${MODE_NAME[lock.mode]}` +
+    ((on("sysTarot") || on("sysIching")) && lock.mode !== "random" ? "\n下列塔羅與金錢卦由此局（天時）＋問卜者生辰（人）＋問題（事）定出" : ""));
   if (on("sysTarot")) {
     used.push("塔羅");
-    data.push("【塔羅四象陣】\n" + POS.map((p, i) => { const c = tarotDrawn[i]; return `${p.title}（${p.desc}）：${c.name}【${c.reversed ? "逆位" : "正位"}／${c.el}元素】`; }).join("\n"));
+    data.push("【塔羅四象陣】\n" + POS.map((p, i) => { const c = tarotDrawn[i];
+      return c ? `${p.title}（${p.desc}）：${c.name}【${c.reversed ? "逆位" : "正位"}／${c.el}元素】` : `${p.title}（${p.desc}）：尚未抽取`; }).join("\n"));
     rules.push("塔羅：依過去根源、現況核心、破局建議、未來趨勢逐張解讀，並看四元素分佈與逆位。");
   }
   if (on("sysIching")) {
     used.push("易經金錢卦");
     const r = analysis();
-    data.push("【易經六爻金錢卦】\n" + [
-      `本卦（現況）：第 ${r.ben.num} 卦【${r.ben.name}】`, `互卦（暗流）：第 ${r.hu.num} 卦【${r.hu.name}】`, `變卦（趨勢）：第 ${r.bian.num} 卦【${r.bian.name}】`,
-      `動爻：${r.moving.length ? r.moving.join("、") : "無動爻（六爻皆靜）"}`, `六爻數值（初→上）：${yaos.join(" ")}`].join("\n"));
+    data.push("【易經六爻金錢卦】\n" + (r ? [
+      `本卦（現況）：第 ${r.ben.num} 卦【${r.ben.name}】：${r.ben.text}`,
+      `互卦（暗流）：第 ${r.hu.num} 卦【${r.hu.name}】：${r.hu.text}`,
+      r.moving.length ? `變卦（趨勢）：第 ${r.bian.num} 卦【${r.bian.name}】：${r.bian.text}` : "變卦：無（六爻皆靜，不變卦）",
+      `動爻：${r.moving.length ? r.moving.join("、") : "無動爻（六爻皆靜）"}`, `六爻數值（初→上，6 老陰、7 少陽、8 少陰、9 老陽）：${yaos.join(" ")}`].join("\n")
+      : `尚未完成六爻起卦（已擲 ${yaos.length}/6）`));
     rules.push("易經：依朱熹《易學啟蒙》動爻斷法（無動爻看本卦卦辭；一爻動看該爻爻辭；二爻動以上爻為主；三爻動看本卦與變卦卦辭；四爻動看變卦兩個靜爻、以下爻為主；五爻動看變卦唯一的靜爻；六爻皆動看變卦卦辭，乾坤看用九、用六），引用卦爻辭原文並用白話說明。");
   }
-  if (on("sysQimen") && lock.pan) {
+  if (on("sysQimen") && lock && lock.pan) {
     used.push("奇門遁甲");
     data.push("【奇門遁甲盤】\n" + QM.render(lock.pan));
     rules.push("奇門遁甲：依問題取用神（通用：日干＝求測人、時干＝所問之事或對方、值符＝大局、值使＝執行；事業看開門；求財投資買賣看生門與戊；房地產：生門＝房屋、死門＝土地、六合＝仲介與合約；感情：乙＝女方、庚＝男方、六合＝婚姻；健康：天芮＝病、天心與乙＝醫藥），看用神宮的神、星、門、天地盤干組合，與日干宮的五行生剋，以及空亡、馬星、伏吟反吟。");
@@ -871,7 +1004,7 @@ function buildReadInput() {
   }
   return [
     "你是精通塔羅、易經、奇門遁甲、梅花易數的占卜解讀者。請用繁體中文、白話、具體地解讀下面這次占卜，不要籠統套話。",
-    "下面的牌、卦、盤都已由程式排好：只能依這些資料解讀，不可改動、不可另外起卦，也不要推算問卜者的命盤。",
+    "下面的牌、卦、盤都已由程式排好：只能依這些資料解讀，不可改動、不可另外起卦，也不要推算問卜者的命盤或流年運勢。若有標示「尚未抽取／尚未完成」的項目，請先提醒我補齊，不要自己代抽代擲。",
     `本次採用：${used.join("、")}。`,
     data.join("\n\n"),
     "【解讀規則】\n" + rules.map(x => "・" + x).join("\n"),
@@ -892,7 +1025,7 @@ function fmtAnswer(text) {
 async function doRead() {
   const sample = await samplePromise;
   if (!sample) return;
-  const todo = readTodo();
+  const todo = divTodo();
   if (todo.length) { $("readNote").textContent = "還不能解讀，尚未完成：" + todo.join("、"); return; }
   const out = $("readOut");
   readCtl = new AbortController();
@@ -912,118 +1045,159 @@ async function doRead() {
 }
 
 // ---------- 指令（三區各自獨立） ----------
-const PYCMD = `"$LOCALAPPDATA/Programs/Python/Python312/python.exe" ~/.claude/skills/astrology-master/scripts/calc_chart.py`;
+// 有 astrology-master 技能的 Claude Code 才用得到；用「python」讓各人的環境自己找直譯器
+const PYCMD = `python ~/.claude/skills/astrology-master/scripts/calc_chart.py`;
+const DISCLAIMER = "若內容涉及投資理財、醫療或法律，只做象徵層面的解讀，不給買賣或診療指示，並提醒這不能取代專業意見。";
 function birthInfo() {
-  const [coordStr, city] = $("birthCity").value.split("|");
+  const v = $("birthCity").value;
+  const base = { name: $("userName").value.trim() || "命主", bd: $("birthDate").value, bt: $("birthTime").value, g: $("gender").value };
+  if (v === "custom") {
+    return { ...base, custom: true, city: $("customCityName").value.trim() || "自訂地點",
+             lat: $("customLat").value.trim(), lon: $("customLon").value.trim(), tzn: $("customTz").value };
+  }
+  const [coordStr, city] = v.split("|");
   const [lat, lon] = coordStr.split(",");
-  return { name: $("userName").value.trim() || "命主", bd: $("birthDate").value, bt: $("birthTime").value, g: $("gender").value,
-           city, lat, lon, tzn: city === "香港" ? "Asia/Hong_Kong" : "Asia/Taipei" };
+  return { ...base, city, lat, lon, tzn: city === "香港" ? "Asia/Hong_Kong" : "Asia/Taipei" };
 }
-function birthArgs(b) { return `--birth "${b.bd}${b.bt ? " " + b.bt : ""}" --tzname ${b.tzn} --lat ${b.lat} --lon ${b.lon} --gender ${b.g}`; }
-function birthLine(b) { return `${b.name}（${b.g === "M" ? "男" : "女"}），${b.bd} ${b.bt || "時間未知"}，${b.city}（${b.lat}, ${b.lon}）`; }
-function setStatus(id, todo) {
+function birthArgs(b) { return `--birth "${b.bd}${b.bt ? " " + b.bt : ""}" --tzname ${b.tzn} --lat ${b.lat || "?"} --lon ${b.lon || "?"} --gender ${b.g}`; }
+function birthLine(b) { return `${b.name}（${b.g === "M" ? "男" : "女"}），${b.bd || "（出生日期未填）"} ${b.bt || "時間未知"}，${b.city}（${b.lat || "?"}, ${b.lon || "?"}，${b.tzn}）`; }
+function birthTodo(b, needTime) {
+  const t = [];
+  if (b.custom && (!b.lat || !b.lon)) t.push("自訂地點的經緯度");
+  return t;
+}
+function setStatus(id, todo, warns) {
   const el = $(id);
-  el.textContent = todo.length ? "尚未完成：" + todo.join("、") : "資料齊全，可以複製。";
-  el.className = "text-xs " + (todo.length ? "text-rose-300" : "text-emerald-300");
+  const w = (warns && warns.length) ? "　注意：" + warns.join("；") : "";
+  el.textContent = (todo.length ? "尚未完成：" + todo.join("、") : "資料齊全，可以複製。") + w;
+  el.className = "text-xs " + (todo.length ? "text-rose-300" : warns && warns.length ? "text-amber-300" : "text-emerald-300");
+}
+
+// ---------- 八字（本頁用 lunar-javascript 排盤） ----------
+// 程式庫輸出簡體（十神、納音），轉成繁體顯示
+const S2T = { "伤": "傷", "财": "財", "杀": "殺", "炉": "爐", "剑": "劍", "锋": "鋒", "头": "頭", "涧": "澗", "蜡": "蠟", "杨": "楊",
+              "雳": "靂", "长": "長", "灯": "燈", "驿": "驛", "钗": "釵", "钏": "釧", "劫": "劫", "泉": "泉" };
+const tc = s => String(s).replace(/[一-鿿]/g, ch => S2T[ch] || ch);
+function baziCalc(b) {
+  if (!b.bd || typeof Solar === "undefined") return null;
+  try {
+    const [y, m, d] = b.bd.split("-").map(Number);
+    const [hh, mm] = b.bt ? b.bt.split(":").map(Number) : [12, 0];
+    const ec = Solar.fromYmdHms(y, m, d, hh, mm, 0).getLunar().getEightChar();
+    ec.setSect(1);   // 23 點後出生，日柱算隔天（和奇門定局一致）
+    const yun = ec.getYun(b.g === "M" ? 1 : 0);
+    const dayun = yun.getDaYun().filter(x => x.getGanZhi()).slice(0, 9);
+    return { ec, yun, dayun };
+  } catch (e) { return null; }
+}
+function baziText(b, z) {
+  const ec = z.ec, hasT = !!b.bt;
+  const cols = [
+    ["年柱", ec.getYear(), ec.getYearShiShenGan(), ec.getYearHideGan(), ec.getYearNaYin()],
+    ["月柱", ec.getMonth(), ec.getMonthShiShenGan(), ec.getMonthHideGan(), ec.getMonthNaYin()],
+    ["日柱", ec.getDay(), "日主", ec.getDayHideGan(), ec.getDayNaYin()]
+  ];
+  if (hasT) cols.push(["時柱", ec.getTime(), ec.getTimeShiShenGan(), ec.getTimeHideGan(), ec.getTimeNaYin()]);
+  const L = cols.map(c => `• ${c[0]}：${c[1]}（天干十神：${tc(c[2])}；地支藏干：${c[3].join("、")}；納音：${tc(c[4])}）`);
+  if (!hasT) L.push("• 時柱：出生時間未知，沒有時柱；請只用年、月、日三柱論命，並說明少了時柱的限制");
+  L.push(`• 日主：${ec.getDayGan()}（${ec.getDayWuXing()[0]}）`);
+  L.push(`• 大運（${b.g === "M" ? "男" : "女"}命${z.yun.isForward() ? "順" : "逆"}行，出生後約 ${z.yun.getStartYear()} 年 ${z.yun.getStartMonth()} 個月 ${z.yun.getStartDay()} 天起運${hasT ? "" : "；出生時間未知，起運以當天中午估算"}）：`);
+  z.dayun.forEach(x => L.push(`　${x.getStartAge()}–${x.getEndAge()} 歲（${x.getStartYear()}–${x.getEndYear()}）：${x.getGanZhi()}`));
+  return L.join("\n");
+}
+function fortuneBazi(day, z) {
+  if (!day || !z) return "";
+  try {
+    const [y, m, d] = day.split("-").map(Number);
+    const lunar = Solar.fromYmd(y, m, d).getLunar();
+    const cur = z.dayun.find(x => x.getStartYear() <= y && y <= x.getEndYear());
+    return [
+      `• 目前大運：${cur ? `${cur.getGanZhi()}（${cur.getStartAge()}–${cur.getEndAge()} 歲，${cur.getStartYear()}–${cur.getEndYear()}）` : "基準日還沒起運，或超出列出的大運範圍"}`,
+      `• 基準日流年：${lunar.getYearInGanZhiByLiChun()}年（以立春換年）`,
+      `• 基準日流月：${lunar.getMonthInGanZhiExact()}月（以節氣換月）　流日：${lunar.getDayInGanZhiExact()}日`
+    ].join("\n");
+  } catch (e) { return ""; }
+}
+function chartPreamble(kind, sysKeys, args) {
+  return `若你是 Claude Code 且裝有 astrology-master 技能：先執行排盤腳本，以腳本結果為準（下方本頁排的八字可拿來對照）：\n${PYCMD} ${args} --systems ${sysKeys}\n` +
+    `若無法執行腳本：只解讀下方本頁已排好的八字；西洋占星與紫微斗數請直接說明「沒有排盤資料、無法解讀」，不要憑印象推算行星或星曜位置。`;
 }
 
 function updateDivPrompt() {
-  const b = birthInfo(), qText = $("questionText").value.trim();
+  const b = birthInfo();
   $("askerLine").textContent = b.bd
     ? `定局會把問卜者的生辰算進去：${b.bd} ${b.bt || "（時間未知）"}，${b.g === "M" ? "男" : "女"}。要修改請到「命盤區」。`
-    : "尚未設定生辰，定局只會用時間與問題；要加入生辰請到「命盤區」填寫。";
-  const timed = [["sysQimen", "qimen", "奇門遁甲"], ["sysMeihua", "meihua", "梅花易數"]].filter(x => on(x[0]));
-  const names = [...(on("sysTarot") ? ["塔羅"] : []), ...(on("sysIching") ? ["易經金錢卦"] : []), ...timed.map(x => x[2])];
-  const parts = [`請啟動 astrology-master 技能，做【占卜】。只解讀這次占卜，不要加入命盤或流年運勢。`, `採用系統：${names.join("、") || "（尚未勾選）"}`];
-  if (timed.length) {
-    let cmd = `${PYCMD} --systems ${timed.map(x => x[1]).join(",")} --ask "${askTime}"`;
-    const a = parseInt($("meihuaA").value, 10), c = parseInt($("meihuaB").value, 10);
-    if (on("sysMeihua") && a > 0 && c > 0) cmd += ` --meihua-nums ${a},${c}`;
-    parts.push(`先執行排盤腳本：\n${cmd}`);
-  }
-  parts.push(`【所問之事】\n• 占卜時間：${askTime}\n• 類別：${$("questionCategory").value}\n• 問題：${qText || "（請輸入具體問題）"}`);
-  if (lock) {
-    parts.push("【時空定局】\n" + [
-      `• 定局時間：${askTime}`,
-      `• 奇門時空局：${lock.pan ? panText(lock.pan) : "（頁面未能排出）"}`,
-      `• 定局方式：${MODE_NAME[lock.mode]}`,
-      (on("sysTarot") || on("sysIching")) ? "• 下列塔羅與金錢卦由此局（天時）＋問卜者生辰（人）＋問題（事）定出" : ""
-    ].filter(Boolean).join("\n"));
-  }
-  if (on("sysTarot")) {
-    parts.push("【塔羅四象陣】\n" + POS.map((p, i) => { const c = tarotDrawn[i];
-      return c ? `• ${p.title}（${p.desc}）：${c.name}【${c.reversed ? "逆位" : "正位"}／${c.el}元素】` : `• ${p.title}：尚未抽取`; }).join("\n"));
-  }
-  if (on("sysIching")) {
-    const r = analysis();
-    parts.push("【易經六爻金錢卦】\n" + (r ? [
-      `• 本卦（現況起因）：第 ${r.ben.num} 卦【${r.ben.name}】：${r.ben.text}`,
-      `• 互卦（隱藏暗流）：第 ${r.hu.num} 卦【${r.hu.name}】：${r.hu.text}`,
-      `• 變卦（最終趨勢）：第 ${r.bian.num} 卦【${r.bian.name}】：${r.bian.text}`,
-      `• 動爻：${r.moving.length ? r.moving.join("、") : "無動爻（六爻皆靜）"}`,
-      `• 六爻數值（初→上）：${yaos.join(" ")}`
-    ].join("\n") : "尚未完成六爻起卦"));
-  }
-  parts.push("【解讀要求】\n1. 依勾選的占卜系統逐項解讀所問之事（奇門遁甲依問題類別取用神；梅花易數看體用生剋；易經依朱熹動爻斷卦法；塔羅看四元素與逆位）。\n2. 最後附【訊號共振表】：每個系統對此事偏吉／偏凶／中性與依據，幾項互相支撐、哪裡矛盾，給出勝率評估與具體行動建議。不要籠統套話。");
-  const todo = [];
-  if (!names.length) todo.push("至少勾選一個占卜系統");
-  if (!qText) todo.push("具體問題");
-  if (qText && !lock) todo.push("按「定局」");
-  if (qText && lock && lock.question !== qText) todo.push("問題已修改，請重新定局");
-  const nDrawn = tarotDrawn.filter(Boolean).length;
-  if (on("sysTarot") && nDrawn < 4) todo.push(`塔羅（已抽 ${nDrawn}/4）`);
-  if (on("sysIching") && yaos.length < 6) todo.push(`易經（已擲 ${yaos.length}/6）`);
-  if (lock) renderLockInfo();
-  setStatus("readyStatus", todo);
-  $("outputPrompt").value = parts.join("\n\n");
+    : "尚未設定生辰：定局只用時間與問題，同一時辰問同一個問題的人會抽到一樣的牌與卦。要因人而異，請到「命盤區」填出生日期。";
+  $("outputPrompt").value = buildReadInput();
+  setStatus("readyStatus", divTodo());
+  renderLockInfo();
   renderDivination();
 }
 
 function updateNatalPrompt() {
   const b = birthInfo();
   const sys = [["sysAstro", "astro", "西洋占星"], ["sysBazi", "bazi", "八字"], ["sysZiwei", "ziwei", "紫微斗數"]].filter(x => on(x[0]));
-  const todo = [];
+  const todo = [], warns = [];
   if (!b.bd) todo.push("出生日期");
   if (!sys.length) todo.push("至少勾選一個命盤系統");
-  setStatus("natalStatus", todo);
+  todo.push(...birthTodo(b));
+  if (b.bd && !b.bt && (on("sysBazi") || on("sysZiwei") || on("sysAstro")))
+    warns.push("沒填出生時間：八字少了時柱，紫微斗數無法定命宮，占星無法定上升與宮位");
+  setStatus("natalStatus", todo, warns);
+  const z = on("sysBazi") ? baziCalc(b) : null;
   const req = sys.length > 1
     ? `1. 先分別說明${sys.map(x => x[2]).join("、")}各自的核心格局。\n2. 再依性格、事業、財運、感情、健康分項比對，指出各系統一致與矛盾之處。\n3. 最後附【系統對照表】與長期發展建議。`
     : `1. 以${sys.length ? sys[0][2] : "所選系統"}說明核心格局。\n2. 依性格、事業、財運、感情、健康分項解讀，最後給長期發展建議。`;
+  const needScript = on("sysAstro") || on("sysZiwei");
   $("natalPrompt").value = [
-    "請啟動 astrology-master 技能，做【命盤】。只看先天命盤，不要加入流年運勢，也不要占卜。",
+    "請用繁體中文解讀下面的【命盤】。只看先天命盤，不要加入流年運勢，也不要占卜。",
     `採用系統：${sys.map(x => x[2]).join("、") || "（尚未勾選）"}`,
-    `先執行排盤腳本：\n${PYCMD} ${birthArgs(b)} --scope natal --systems ${sys.map(x => x[1]).join(",")}`,
+    needScript ? chartPreamble("natal", sys.map(x => x[1]).join(","), `${birthArgs(b)} --scope natal`) : "",
     `【命主】\n• ${birthLine(b)}`,
-    `【解讀要求】\n${req}\n不要籠統套話。`
-  ].join("\n\n");
+    z ? `【八字（本頁排盤：依出生地當地鐘錶時間，未做真太陽時校正）】\n${baziText(b, z)}` : (on("sysBazi") && b.bd ? "【八字】本頁未能排出（曆法程式沒有載入），請自行排盤。" : ""),
+    `【解讀要求】\n${req}\n不要籠統套話。${DISCLAIMER}`
+  ].filter(Boolean).join("\n\n");
 }
 
 function updateFortunePrompt() {
   const b = birthInfo(), day = $("fortuneDate").value;
   $("fortuneWho").textContent = b.bd ? `命主：${birthLine(b)}。要修改請到「命盤區」。` : "尚未填寫出生資料，請先到「命盤區」填寫。";
   const sys = [["fAstro", "astro", "占星（流年行星、次限推運）"], ["fBazi", "bazi", "八字（大運、流年、流月）"], ["fZiwei", "ziwei", "紫微斗數（大限、流年四化）"]].filter(x => on(x[0]));
-  const todo = [];
+  const todo = [], warns = [];
   if (!b.bd) todo.push("出生日期（到命盤區填寫）");
   if (!day) todo.push("基準日");
   if (!sys.length) todo.push("至少勾選一個系統");
-  setStatus("fortuneStatus", todo);
+  todo.push(...birthTodo(b));
+  if (b.bd && !b.bt) warns.push("沒填出生時間：大運起運時間是估算的，紫微大限與占星宮位無法準確");
+  setStatus("fortuneStatus", todo, warns);
+  const z = on("fBazi") ? baziCalc(b) : null;
+  const needScript = on("fAstro") || on("fZiwei");
   $("fortunePrompt").value = [
-    "請啟動 astrology-master 技能，做【流年運勢】。只看運勢走到哪裡，不要重講整份命盤，也不要占卜。",
+    "請用繁體中文解讀下面的【流年運勢】。只看運勢走到哪裡，不要重講整份命盤，也不要占卜。",
     `採用系統：${sys.map(x => x[2]).join("、") || "（尚未勾選）"}`,
-    `先執行排盤腳本：\n${PYCMD} ${birthArgs(b)} --scope fortune --on ${day || "YYYY-MM-DD"} --systems ${sys.map(x => x[1]).join(",")}`,
+    needScript ? chartPreamble("fortune", sys.map(x => x[1]).join(","), `${birthArgs(b)} --scope fortune --on ${day || "YYYY-MM-DD"}`) : "",
     `【命主】\n• ${birthLine(b)}\n• 基準日：${day || "（未選）"}`,
-    "【解讀要求】\n1. 逐項說明各系統目前的運勢：占星看流年行星的緊密相位與落宮、次限月亮與次限相位；八字看目前大運、流年、流月與刑沖合害；紫微看大限與流年的命宮、四化與重點宮位。\n2. 指出各系統共同指向的主題，以及彼此矛盾之處。\n3. 依事業、財運、感情、健康整理這一年與本月的重點，並標出接下來要留意的年份或月份。\n4. 最後給具體可執行的建議。不要籠統套話。"
-  ].join("\n\n");
+    z ? `【八字（本頁排盤）】\n${baziText(b, z)}\n${fortuneBazi(day, z)}` : "",
+    "【解讀要求】\n1. 逐項說明各系統目前的運勢：占星看流年行星的緊密相位與落宮、次限月亮與次限相位；八字看目前大運、流年、流月與原局的刑沖合害；紫微看大限與流年的命宮、四化與重點宮位。\n2. 指出各系統共同指向的主題，以及彼此矛盾之處。\n3. 依事業、財運、感情、健康整理這一年與本月的重點，並標出接下來要留意的年份或月份。\n4. 最後給具體可執行的建議。不要籠統套話。" + DISCLAIMER
+  ].filter(Boolean).join("\n\n");
 }
-function updatePrompt() { applyToggles(); updateDivPrompt(); updateNatalPrompt(); updateFortunePrompt(); }
+function updatePrompt() { applyToggles(); updateDivPrompt(); updateNatalPrompt(); updateFortunePrompt(); saveDivination(); }
 
 function wireCopy(btnId, taId) {
   $(btnId).addEventListener("click", () => {
     const ta = $(taId), btn = $(btnId);
     const done = msg => { btn.textContent = msg; setTimeout(() => btn.textContent = "複製指令", 2500); };
+    // 舊瀏覽器或不允許剪貼簿時，退回選取＋execCommand；再不行就請使用者自己複製
+    const fallback = () => {
+      ta.focus(); ta.select(); ta.setSelectionRange(0, ta.value.length);
+      let ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      done(ok ? "已複製，貼給 Claude" : (matchMedia("(pointer: coarse)").matches ? "已全選，請長按複製" : "已全選，請按 Ctrl+C"));
+    };
     try {
-      navigator.clipboard.writeText(ta.value).then(() => done("已複製，貼給 Claude"), () => { ta.select(); done("請按 Ctrl+C 複製"); });
-    } catch (e) { ta.select(); done("請按 Ctrl+C 複製"); }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(ta.value).then(() => done("已複製，貼給 Claude"), fallback);
+      else fallback();
+    } catch (e) { fallback(); }
   });
 }
 
@@ -1041,8 +1215,9 @@ function showTab(name, remember) {
 // ---------- 初始化 ----------
 (function init() {
   const s = loadProfile();
-  const PROFILE = ["userName", "birthDate", "birthTime", "gender", "birthCity"];
+  const PROFILE = PROFILE_IDS;
   PROFILE.forEach(id => { if (s[id]) $(id).value = s[id]; });
+  if (!$("birthCity").value) $("birthCity").selectedIndex = 0;   // 存的選項已不存在時退回第一個
   stamp();
   const t = new Date();
   $("fortuneDate").value = `${t.getFullYear()}-${pad(t.getMonth() + 1)}-${pad(t.getDate())}`;
@@ -1061,14 +1236,25 @@ function showTab(name, remember) {
       updatePrompt();
     });
   });
-  $("lockBtn").addEventListener("click", doLock);
+  $("lockBtn").addEventListener("click", onLockClick);
   $("readBtn").addEventListener("click", doRead);
   $("stopBtn").addEventListener("click", () => { if (readCtl) readCtl.abort(); });
+  // 頁面內解讀只在 claude.ai 的 Artifact 檢視裡可用；在 GitHub Pages 等一般網址整區隱藏，改用複製指令
   samplePromise.then(sp => {
-    if (!sp) { $("readBtn").hidden = true; $("readNote").textContent = "這個檢視環境不能直接呼叫 Claude（例如未登入或用公開連結開啟）；請改用下方的占卜指令。"; }
+    if (!sp) { $("readSection").hidden = true; applyToggles(); }
   });
   try { const m = localStorage.getItem("fiveArtsLockMode"); if (m && MODE_NAME[m]) $("lockMode").value = m; } catch (e) {}
-  $("lockMode").addEventListener("change", () => { try { localStorage.setItem("fiveArtsLockMode", $("lockMode").value); } catch (e) {} });
+  $("lockMode").addEventListener("change", () => { try { localStorage.setItem("fiveArtsLockMode", $("lockMode").value); } catch (e) {} updatePrompt(); });
+  $("clearDataBtn").addEventListener("click", () => {
+    const btn = $("clearDataBtn");
+    if (!btn.dataset.armed) {
+      btn.dataset.armed = "1"; btn.textContent = "再按一次確認清除";
+      setTimeout(() => { delete btn.dataset.armed; btn.textContent = "清除本機資料"; }, 4000);
+      return;
+    }
+    try { ["fiveArtsUserProfile", "fiveArtsSystems", "fiveArtsLockMode", "fiveArtsTab", DIV_KEY].forEach(k => localStorage.removeItem(k)); } catch (e) {}
+    location.hash = ""; location.reload();
+  });
   $("resetTarotBtn").addEventListener("click", resetTarot);
   $("resetIChingBtn").addEventListener("click", resetIChing);
   $("castBtn").addEventListener("click", castNext);
@@ -1082,7 +1268,9 @@ function showTab(name, remember) {
   let first = location.hash.slice(1);
   if (!TABS[first]) { try { first = localStorage.getItem("fiveArtsTab"); } catch (e) { first = ""; } }
   showTab(first || "divine", false);
-  renderTarot(); renderYao(); updatePrompt();
+  renderTarot(); renderYao();
+  restoreDivination();
+  updatePrompt();
 })();
 </script>
 
